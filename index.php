@@ -1,4 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İndex</title>
+</head>
+<body>
+
 <?php
+
 $baglan = mysqli_connect("localhost", "root", "", "yeniveretabani");
 
 if (!$baglan) {
@@ -9,8 +19,8 @@ if (!$baglan) {
 ?>
 
 <form method="POST" action="">
-    <input type="text" name="isim">
-    <input type="text" name="mapsApi">
+    <input type="text" name="isim" placeholder="isim">
+    <input type="text" name="mapsApi" placeholder="Maps">
 
     <button type="submit" name="buton">Gönder</button>
 </form>
@@ -22,9 +32,9 @@ if (isset($_POST["buton"])) {
 
 
     $currentHost = $_SERVER['HTTP_HOST'];
-    $customUrl = 'http://' . $currentHost . '/yeniLink/a.php?isim=' . urlencode($isim);
+    $customUrl = 'http://' . $currentHost . '/PhpMysql-main/a.php?isim=' . urlencode($isim);
+    $sql = "INSERT INTO link_tablosu_yeni (isim, mapsApi, customUrl, urlrequest) VALUES ('$isim', '$mapsApi', '$customUrl', 0)";
 
-    $sql = "INSERT INTO link_tablosu (isim, mapsApi, customUrl) VALUES ('$isim', '$mapsApi', '$customUrl')";
 
     if (mysqli_query($baglan, $sql)) {
         echo "Veri başarıyla eklendi";echo "<br>";
@@ -35,4 +45,8 @@ if (isset($_POST["buton"])) {
         echo "Veri eklenirken hata oluştu: " . mysqli_error($baglan);
     }
 }
+
 ?>
+
+</body>
+</html>
