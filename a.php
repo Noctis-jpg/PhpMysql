@@ -7,8 +7,6 @@
 </head>
 <body>
 
-
-
 <?php
 $baglan = mysqli_connect("localhost", "root", "", "yeniveretabani");
 
@@ -16,10 +14,13 @@ if (!$baglan) {
     die("connection failed:" . mysqli_connect_error());
 }
 
+
+
+
 $isim = isset($_GET['isim']) ? mysqli_real_escape_string($baglan, $_GET['isim']) : '';
 
-$urlrequest = 0; // Varsayılan değer
-
+$sql = "UPDATE link_tablosu_yeni SET urlrequest = urlrequest + 1 WHERE isim = '$isim'";
+mysqli_query($baglan, $sql);
 
 
 
